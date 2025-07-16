@@ -1,4 +1,4 @@
-FROM ruby:3.2-slim
+FROM ruby:3.1-slim
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     rm -rf /var/lib/apt/lists/*
 
 # Copy and install gems first for better caching
-COPY Gemfile ./
+COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs 4 --retry 3
 
 # Copy application code
